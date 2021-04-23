@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <title>Establishment Business</title>
+
+        <meta charset='utf-8' />
+    
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+        <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+        <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+
+
+        <style>
+           body { margin: 0; padding: 0; }
+           #map { width: 500px; height: 500px; }
+        </style>
+
+    </head>
+
+
+    <body>
+        {%if output%}
+
+            <form action="" method="post">
+                {%csrf_token%}
+                <label for="region_type">Industry:</label><br>
+                <input type="text" id="region_type" name="region_type" value = {{region_type}}><br>
+                <label for="output">Output:</label><br>
+                <textarea id="output" name="output" rows="4" cols="50">{{output}}</textarea><br><br>
+                <input type="submit" value="Submit">
+            </form>
+
+            
+            <div id="map"></div>
+            <script>
+
+                var coordinate_list = {{coordinate_list}};
+
+                mapboxgl.accessToken = 'pk.eyJ1Ijoic3AyNjE5OTgiLCJhIjoiY2tucXo3djdjMGYybDJvbW54YmVqZ3J1YyJ9.qdnuS4178f-S2KEsrzrang';
+                var map = new mapboxgl.Map({
+                    container: 'map', // container ID
+                    style: 'mapbox://styles/sp261998/cknsu0wje0n6g18phq11namji', // style URL
+                    // center: [-68.137343, 45.137451], // starting position
+                    center: [73.84089591616562,18.547714861037228],
+                    zoom: 12 // starting zoom
+                });
+
+                map.on('load', function () {
+                    // Add a data source containing GeoJSON data.
+                    map.addSource('maine', {
+                        'type': 'geojson',
+                        'data': {
+                            'type': 'Feature',
+                            'geometry': {
+                                'type': 'Polygon',
+                                // These coordinates outline Maine.
+                                'coordinates': [ coordinate_list]
+                         
+                            }
+                        }
+                    });
+
+                    // Add a new layer to visualize the polygon.
+                    map.addLayer({
+                        'id': 'maine',
+                        'type': 'fill',
+                        'source': 'maine', // reference the data source
+                        'layout': {},
+                        'paint': {
+                            'fill-color': ' #DC143C', // blue color fill
+                            'fill-opacity': 0.2
+                        }
+                    });
+                    // Add a black outline around the polygon.
+                    map.addLayer({
+                        'id': 'outline',
+                        'type': 'line',
+                        'source': 'maine',
+                        'layout': {},
+                        'paint': {
+                            'line-color': '#FF0000',
+                            'line-width': 1
+                        }
+                    });
+                });
+            </script>
+                    
+        {%else%}
+            <form action="" method="post">
+                {%csrf_token%}
+                <label for="region_type">Industry:</label><br>
+                <input type="text" id="region_type" name="region_type" placeholder="Type your region"><br>
+                <label for="output">Output:</label><br>
+                <input type="text" id="output" name="output"><br><br>
+                <input type="submit" value="Submit">
+            </form>
+        {%endif%}
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+

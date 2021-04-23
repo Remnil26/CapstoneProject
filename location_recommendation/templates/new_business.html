@@ -1,0 +1,162 @@
+<html>
+    <head>
+        <title>Establishment Business</title>
+
+        <meta charset='utf-8' />
+    
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
+
+
+        <style>
+           body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            /* position: absolute; */
+            /* top: 0;
+            bottom: 0; */
+            width: 500px;
+            height: 500px;
+        }
+
+        .marker {
+            background-image: url("https://img.icons8.com/ios-filled/50/fa314a/place-marker--v2.png");
+            /* background-image: url("/cliparts/0/L/y/g/A/p/red-circle-th.png"); */
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .mapboxgl-popup {
+            max-width: 200px;
+        }
+
+        .mapboxgl-popup-content {
+            text-align: center;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        </style>
+
+    </head>
+
+
+    <body>
+        {%if industry_type%}
+
+            <form action="" method="post">
+                {%csrf_token%}
+                <label for="industry_type">Industry:</label><br>
+                <input type="text" id="industry_type" name="industry_type" value = {{industry_type}}><br>
+                <label for="output">Output:</label><br>
+                <textarea id="output" name="output" rows="4" cols="50">{{output.0}},{{output.1}},{{output.2}}</textarea><br><br>
+                <input type="submit" value="Submit">
+            </form>
+
+
+                    <div id='map'></div>
+
+        <script>
+
+        var lon1 = {{lon.0}}; 
+        var lat1 = {{lat.0}};
+        var lon2 = {{lon.1}}; 
+        var lat2 = {{lat.1}};
+        var lon3 = {{lon.2}}; 
+        var lat3 = {{lat.2}};
+        var place1 = "{{output.0}}";
+        var place2 = "{{output.1}}";
+        var place3 = "{{output.2}}";
+
+
+
+
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic3AyNjE5OTgiLCJhIjoiY2tucXo3djdjMGYybDJvbW54YmVqZ3J1YyJ9.qdnuS4178f-S2KEsrzrang';
+
+        var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/sp261998/cknr2i3lb0guc17p8njc9iuhn',
+        center: [73.85507695553459,18.554419017104955],
+        zoom: 10
+        });
+
+        var geojson = {
+        type: 'FeatureCollection',
+        features: [{
+            type: 'Feature',
+            geometry: {
+            type: 'Point',
+            coordinates: [lon1, lat1]
+            },
+            properties: {
+            title: place1,
+            description: 'Recommendation-1'
+            }
+        },
+        {
+            type: 'Feature',
+            geometry: {
+            type: 'Point',
+            coordinates: [lon2, lat2]
+            },
+            properties: {
+            title: place2,
+            description: 'Recommendation-2'
+            }
+        },
+        {
+            type: 'Feature',
+            geometry: {
+            type: 'Point',
+            coordinates: [lon3, lat3]
+            },
+            properties: {
+            title: place3,
+            description: 'Recommendation-3'
+            }
+        }]
+        };
+
+
+        // add markers to map
+        geojson.features.forEach(function(marker) {
+
+        // create a HTML element for each feature
+        var el = document.createElement('div');
+        el.className = 'marker';
+
+        // make a marker for each feature and add to the map
+        new mapboxgl.Marker(el)
+            .setLngLat(marker.geometry.coordinates)
+            .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+            .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+            .addTo(map);
+        });
+
+        // var center = [-75.343, 39.984]; 
+        // var radius = 5; 
+        // var options = {steps: 10, units: 'kilometers', properties: {foo: 'bar'}}; 
+        // var circle = turf.circle(center, radius, options);
+
+
+        </script>
+
+        {%else%}
+            <form action="" method="post">
+                {%csrf_token%}
+                <label for="industry_type">Industry:</label><br>
+                <input type="text" id="industry_type" name="industry_type" placeholder="Type your industry"><br>
+                <label for="output">Output:</label><br>
+                <input type="text" id="output" name="output"><br><br>
+                <input type="submit" value="Submit">
+            </form>
+        {%endif%}
+    </body>
+</html>
