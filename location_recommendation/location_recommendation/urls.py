@@ -20,7 +20,7 @@ from recommendation_engine import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index),
-    path('established_business/',views.established_business),
-    path('new_business/',views.new_business),
-    path('region_wise_business/',views.region_wise_business),
+    path('established_business/',views.established_business,name ="established_business"),
+    path('new_business/',views.new_business,name = "new_business"),
+    path('region_wise_business/',views.region_wise_business, name= "region_wise_business"),
 ]

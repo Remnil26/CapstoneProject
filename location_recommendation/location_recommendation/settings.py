@@ -16,6 +16,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR,"templates")
 DATASET_DIR = os.path.join(BASE_DIR,"places_dataset.csv")
+STATIC_DIR = os.path.join(BASE_DIR,"static")
+# print(STATIC_DIR)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -119,6 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [ STATIC_DIR, ]
 
 region_wise_coordinates = {
                       1 : [[73.74189873703614, 18.500615086276284],[73.7603367774645 , 18.527612110755555],[73.77762976892929, 18.5283233337195],[73.78561202314167, 18.511964809996083],

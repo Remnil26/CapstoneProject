@@ -1,47 +1,254 @@
 <html>
     <head>
-        <title>Establishment Business</title>
-
-        <meta charset='utf-8' />
-    
-        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-        <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
-        <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
-
+        <title>Region Wise Business</title>
+        <meta charset="UTF-8">
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
+        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
         <style>
-           body { margin: 0; padding: 0; }
-           #map { width: 500px; height: 500px; }
+            body{background-color : #000000;
+                 overflow-x:hidden;
+                 margin:0;
+                }
+            a{color:#FFFFFF; font-size:15px; font-family:SF Pro Display;}
+            h1{font-size:80px; font-weight:bold; font-family:SF Pro Display; margin-left:375px;}
+            hr.dashed {
+                border-top: 3px dashed #0FEFA4;
+                
+            }
+           #map { width: 1455px;
+            height: 609px; }
+
+            .navbar {
+            display: inline-block;
+        }
+
+        
+        .nav-link {
+            font-weight: bold;
+            font-size: 14px;
+            text-decoration: none;
+            color: #FFFFFF;
+            padding: 20px 0px;
+            margin: 0px 20px;
+            display: inline-block;
+            position: relative;
+            opacity: 1;
+        }
+
+        .nav-link:hover {
+            opacity: 0.75;
+        }
+
+        .nav-link::before {
+            transition: 300ms;
+            height: 5px;
+            content: "";
+            position: absolute;
+            background-color: #00e64d;
+        }
+
+        .nav-link-ltr::before {
+            width: 0%;
+            bottom: 10px;
+        }
+
+        .nav-link-ltr:hover::before {
+            width: 100%;
+        }
+
+
+
+           #div6 {
+               width:96%;
+               height:670px;
+               border-radius: 11px;
+               margin-top: 99px;
+               margin-left: 29px;
+               background:linear-gradient(135deg,  blueviolet 0%, blueviolet 100%);
+               z-index: -1;
+           }
+
+           #div1 {
+            width: 20%;
+            height:183px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  black 0%, black 100%);
+            margin-top: -628px;
+            margin-left: 70px;
+            box-shadow: 0 32px 32px 0 rgba(0, 0, 0, 0.3);
+            z-index: 1;
+           }
+
+        #div2 {
+            width: 20%;
+            height:183px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  black 0%, black 100%);
+            margin-top: 27px;
+            margin-left: 72px;
+            box-shadow: 0 32px 32px 0 rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        #div3 {
+            width: 20%;
+            height:183px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  black 0%, black 100%);
+            margin-top: -393px;
+            margin-left: 417px;
+            box-shadow: 0 32px 32px 0 rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        #div4 {
+            width: 20%;
+            height:183px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  black 0%, black 100%);
+            margin-top: 27px;
+            margin-left: 417px;
+            box-shadow: 0 32px 32px 0 rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        #div5 {
+            width: 20%;
+            height:183px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  black 0%, black 100%);
+            margin-top: 29px;
+            margin-left: 72px;
+            box-shadow: 0 32px 32px 0 rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        #head1 {
+            background:linear-gradient(135deg, #0FB2EF 0%,#0FB2EF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: -45px;
+            font-size: 80px;
+        }
+
+        .text {
+            background: linear-gradient(135deg, white 0%,white 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         </style>
 
     </head>
 
 
     <body>
-        {%if output%}
+
+        <div class="navbar">
+            <a href="http://127.0.0.1:8000/"><img style="height:273px; margin-top:-27px;" src="/static/logo.png" alt=""></a>
+            <a class="nav-link nav-link-ltr" style=" text-decoration:none; color:white; font-size:25px; font-weight:bold; margin-top:34px;" href="http://127.0.0.1:8000/">Why LBRS?</a>
+            <a class="nav-link nav-link-ltr" style=" text-decoration:none; color:white; font-size:25px; font-weight:bold; margin-top:34px;" href="{% url 'new_business' %}">New</a>
+            <a class="nav-link nav-link-ltr" style=" text-decoration:none; color:white; font-size:25px; font-weight:bold; margin-top:34px;" href="{% url 'established_business' %}">Established</a>
+            <a class="nav-link nav-link-ltr" style=" text-decoration:none; color:white; font-size:25px; font-weight:bold; margin-top:34px;" href="{% url 'region_wise_business' %}">Region</a>
+        </div>
+
+        <h1 id="head1" class="text">Regionwise Business</h1>
+
+
+        {%if region_type%}
 
             <form action="" method="post">
                 {%csrf_token%}
-                <label for="region_type">Industry:</label><br>
-                <input type="text" id="region_type" name="region_type" value = {{region_type}}><br>
-                <label for="output">Output:</label><br>
-                <textarea id="output" name="output" rows="4" cols="50">{{output}}</textarea><br><br>
-                <input type="submit" value="Submit">
+                <!-- <label for="region_type">Choose a Region:</label><br> -->
+                <select style="width: 252px; height: 38px; margin-left: 29px;border-radius: 11px; border: 5px solid #00FF00; background: black; color: #FFFFFF; margin-top: 25px;" name="region_type" id="region_type" onchange="this.form.submit()">
+    
+                        <option value="1" {% if region_type == 1 %}selected{% endif %}>Region 1</option>
+                        <option value="2" {% if region_type == 2 %}selected{% endif %}>Region 2</option>
+                        <option value="3" {% if region_type == 3 %}selected{% endif %}>Region 3</option>
+                        <option value="4" {% if region_type == 4 %}selected{% endif %}>Region 4</option>
+                        <option value="5" {% if region_type == 5 %}selected{% endif %}>Region 5</option>
+                        <option value="6" {% if region_type == 6 %}selected{% endif %}>Region 6</option>
+                        <option value="7" {% if region_type == 7 %}selected{% endif %}>Region 7</option>
+                        
+                </select>
+                <br />
+
+                    <div id="div6" >
+                        <div class="container">
+
+                        </div>
+                        
+                    </div>
+
+                    <div id="div1" >
+                        <div class="container">
+                            <p style="margin-top:28px; font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Industry: {{top_five.0}}</p>
+                            <p style="font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Predicted Rating:{{top_predicted_rating.0}}</p>
+                            <p style="font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Average Rating:{{avg_rating.0}}</p>
+                            <p style="font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Total Shops:{{total_shops.0}}</p>
+                        </div>
+                    </div>
+
+                    <div id="div2" >
+                        <div class="container">
+                            <p style="margin-top:28px; font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:1;">Industry: {{top_five.1}}</p>
+                            <p style="font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Predicted Rating:{{top_predicted_rating.1}}</p>
+                            <p style="font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Average Rating:{{avg_rating.1}}</p>
+                            <p style="font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Total Shops:{{total_shops.1}}</p>
+                        </div>
+                    </div>
+
+                    <div id="div3" >
+                        <div class="container">
+                            <p style="margin-top:28px; font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Industry: {{top_five.2}}</p>
+                            <p style="font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Predicted Rating:{{top_predicted_rating.2}}</p>
+                            <p style="font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Average Rating:{{avg_rating.2}}</p>
+                            <p style="font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Total Shops:{{total_shops.2}}</p>
+                        </div>
+                    </div>
+
+                    <div id="div4" >
+                        <div class="container">
+                            <p style="margin-top:28px; font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Industry: {{top_five.3}}</p>
+                            <p style="font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Predicted Rating:{{top_predicted_rating.3}}</p>
+                            <p style="font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Average Rating:{{avg_rating.3}}</p>
+                            <p style="font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Total Shops:{{total_shops.3}}</p>
+                        </div>
+                    </div>
+
+                    <div id="div5" >
+                        <div class="container">
+                            <p style="margin-top:28px; font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Industry: {{top_five.4}}</p>
+                            <p style="font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Predicted Rating:{{top_predicted_rating.4}}</p>
+                            <p style="font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Average Rating:{{avg_rating.4}}</p>
+                            <p style="font-size:18px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Total Shops:{{total_shops.4}}</p>
+                        </div>
+                    </div>
+
             </form>
 
             
-            <div id="map"></div>
+            <div id='map' style=" width: 693px; margin-left: 759px; margin-top: -621px; box-shadow: 0 64px 64px 0 rgba(0, 0, 0, 0.3); border-radius: 11px;"></div>
             <script>
 
                 var coordinate_list = {{coordinate_list}};
+                var lon_center = "{{center_lon}}";
+                var lat_center = "{{center_lat}}";
 
                 mapboxgl.accessToken = 'pk.eyJ1Ijoic3AyNjE5OTgiLCJhIjoiY2tucXo3djdjMGYybDJvbW54YmVqZ3J1YyJ9.qdnuS4178f-S2KEsrzrang';
                 var map = new mapboxgl.Map({
                     container: 'map', // container ID
-                    style: 'mapbox://styles/sp261998/cknsu0wje0n6g18phq11namji', // style URL
+                    style: 'mapbox://styles/sp261998/ckojupmvi1rfx17oht4q73d08', // style URL
                     // center: [-68.137343, 45.137451], // starting position
-                    center: [73.84089591616562,18.547714861037228],
-                    zoom: 12 // starting zoom
+                    center: [lon_center,lat_center],
+                    zoom: 11 // starting zoom
                 });
 
                 map.on('load', function () {
@@ -66,8 +273,8 @@
                         'source': 'maine', // reference the data source
                         'layout': {},
                         'paint': {
-                            'fill-color': ' #DC143C', // blue color fill
-                            'fill-opacity': 0.2
+                            'fill-color': ' #39FF14', // blue color fill
+                            'fill-opacity': 0.3
                         }
                     });
                     // Add a black outline around the polygon.
@@ -83,16 +290,33 @@
                     });
                 });
             </script>
+
+            <br><br><br><br>
                     
         {%else%}
+
             <form action="" method="post">
                 {%csrf_token%}
-                <label for="region_type">Industry:</label><br>
-                <input type="text" id="region_type" name="region_type" placeholder="Type your region"><br>
-                <label for="output">Output:</label><br>
-                <input type="text" id="output" name="output"><br><br>
-                <input type="submit" value="Submit">
+                    <!-- <label for="region_type">Choose a Region:</label><br> -->
+                    <!-- <select name="region_type" id="region_type" onchange="this.form.submit()"> -->
+                    <select style="width: 252px; height: 38px; margin-left: 29px;border-radius: 11px; border: 5px solid #00FF00; background: black; color: #FFFFFF; margin-top: 25px;" name="region_type" id="region_type" onchange="this.form.submit()">
+                    <option value="Choose Your Region"selected>Choose Your Region</option>
+                    <option value="1">Region 1</option>
+                    <option value="2">Region 2</option>
+                    <option value="3">Region 3</option>
+                    <option value="4">Region 4</option>
+                    <option value="5">Region 5</option>
+                    <option value="6">Region 6</option>
+                    <option value="7">Region 7</option>
+                </select>
+                <br>
+                <div class="card" style=" height:463px; width: 627px;margin-left: 29px;border-radius: 11px; border: 5px solid #00FF00; background: black; color: #FFFFFF; margin-top: 25px;">
+                    <div class="card-body" style="padding-top: 137px; padding-left:120px; padding-right:108px; text-align: center; font-size:21px ; font-family: SF Pro Display;">
+                        <p class="card-text">Please select the corresponding region for the model to list out the best and the worst performing business types in that regions</p>
+                    </div>
+                </div>
             </form>
+    
         {%endif%}
     </body>
 </html>

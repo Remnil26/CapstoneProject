@@ -1,13 +1,260 @@
 <html>
     <head>
-        <title>Home</title>
+        <title>LBRSB</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <style>
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body{
+            background-color : black;
+            overflow-x:hidden;
+            margin:0;
+            }
+
+        a{color:#FFFFFF; font-size:15px; font-family:SF Pro Display;}
+
+        h1{font-size:80px; font-weight:bold; font-family:SF Pro Display;}
+
+         div.absolute {
+                        position: absolute;
+                        top: -25px;
+                        right: -80px;
+                        /* width: 1000px;
+                        height: 700px; */
+         }
+
+         .navbar {
+            display: inline-block;
+        }
+
+        
+        .nav-link {
+            font-weight: bold;
+            font-size: 14px;
+            text-decoration: none;
+            color: #FFFFFF;
+            padding: 20px 0px;
+            margin: 0px 20px;
+            display: inline-block;
+            position: relative;
+            opacity: 1;
+        }
+
+        .nav-link:hover {
+            opacity: 0.75;
+        }
+
+            .nav-link::before {
+            transition: 300ms;
+            height: 5px;
+            content: "";
+            position: absolute;
+            background-color: #00FF00;
+        }
+
+            .nav-link-ltr::before {
+            width: 0%;
+            bottom: 10px;
+        }
+
+            .nav-link-ltr:hover::before {
+            width: 100%;
+        }
+
+        .HomepageAnonHeader_bg-3LBLP {
+            bottom:201px;
+            position: absolute;
+            right:31px;
+            width: 600px;
+            /* z-index: -1; */
+        }
+
+        .HomepageAnonHeader_bg-3LBLP0 {
+            bottom: -798px;
+            position: absolute;
+            left: 8px;
+            width: 900px;
+            z-index: -1;
+        }
+
+        .HomepageAnonHeader_bg-3LBLP1 {
+            bottom: -1541px;
+            position: absolute;
+            right: -3%;
+            width: 400px;
+            z-index: -1;
+        }
+
+
+        #description {
+            width: 93%;
+            height:670px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  blueviolet 0%, blueviolet 100%);
+            margin-top: 63px;
+            margin-left: 52px;
+            box-shadow: 0 64px 64px 0 rgba(0, 0, 0, 0.75);
+        }
+
+        #flowchart {
+            width: 93%;
+            height:670px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  #4ff58f 0%, #4ff58f 100%);
+            margin-top: 63px;
+            margin-left: 52px;
+            box-shadow: 0 64px 64px 0 rgba(0, 0, 0, 0.75)
+        }
+
+        #card1 {
+            width: 20%;
+            height:183px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  black 0%, black 100%);
+            margin-top: -286px;
+            margin-left: 981px;
+            box-shadow: 0 32px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        #card2 {
+            width: 20%;
+            height:183px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  black 0%, black 100%);
+            margin-top: 26px;
+            margin-left: 1098px;
+            box-shadow: 0 32px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        #card3 {
+            width: 20%;
+            height:183px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  black 0%, black 100%);
+            margin-top: 28px;
+            margin-left: 981px;
+            box-shadow: 0 32px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* #card5 {
+            width: 60%;
+            height:566px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  #78244C 0%, #78244C 100%);
+            margin-top: -76px;
+            margin-left: 670px;
+            box-shadow: 0 32px 32px 0 rgba(0, 0, 0, 0.3);
+        } */
+
+        
+        .pointer {
+            top: 1144px;
+            left: 40px;
+            position: absolute;
+            height:287px;
+            /* position: absolute; */
+        }
+
+        
+        </style>
     </head>
     <body>
-        <h1>Home</h1>
-        <a href="established_business/">Established Business</a><br>
-        <a href="new_business/">New Business</a><br>
-        <a href="region_wise_business/">Regionwise Business</a><br>
+
+         <div class="navbar">
+            <a href="http://127.0.0.1:8000/"><img style="height:273px; margin-top:-27px;" src="/static/logo.png" alt=""></a>
+            <a class="nav-link nav-link-ltr" style=" text-decoration:none; color:white; font-size:25px; font-weight:bold; margin-top:34px;" href="#description">Why LBRS?</a>
+            <a class="nav-link nav-link-ltr" style=" text-decoration:none; color:white; font-size:25px; font-weight:bold; margin-top:34px;" href="{% url 'new_business' %}">New</a>
+            <a class="nav-link nav-link-ltr" style=" text-decoration:none; color:white; font-size:25px; font-weight:bold; margin-top:34px;" href="{% url 'established_business' %}">Established</a>
+            <a class="nav-link nav-link-ltr" style=" text-decoration:none; color:white; font-size:25px; font-weight:bold; margin-top:34px;" href="{% url 'region_wise_business' %}">Region</a>
+        </div>
+
+        <div class="container-fluid" style="margin-top: 5px; margin-left:38px;">
+            <h1 style="color:#C3073F; line-height: 0.8;">Location Based</h1>
+            <h1 style="color:#0096FF; line-height: 0.8;">Recomendation</h1>
+            <h1 style="color:#0096FF; line-height: 0.8;">System For</h1>
+            <h1 style="color:#00FF00; line-height: 0.8;">Business</h1>
+        </div>
+
+        <div class="absolute" style="top:145px; right:112px;">
+            <img src="/static/globe2.gif" alt="Forest" width="800" height="600" style="float:right">
+        </div>
+
+        <div>
+          <img class="HomepageAnonHeader_bg-3LBLP" id="design" src="https://cpwebassets.codepen.io/assets/packs/lines-2-4e66616a5ef291c3566a7ddfe1ffaaa8.svg" alt="" align="right">
+        </div>
+
+        <div>
+            <img class="HomepageAnonHeader_bg-3LBLP0" id="design" src="https://cpwebassets.codepen.io/assets/packs/lines-3-4541e35a1939230404d773f7eeddcc9b.svg" alt="" align="right">
+        </div>
+
+        <div>
+            <img class="HomepageAnonHeader_bg-3LBLP1" id="design" src="https://cpwebassets.codepen.io/assets/packs/lines-1-6ac7ba4c47562c61c5018028fd2b7a0e.svg" alt="" align="right">
+        </div>
+
+        <div id="description" class="card0" style="margin-top: 135px;">
+            <div class="container" style="margin-left: 10px;">
+                <br><br><br><br>
+                <h2 style="font-size:35px; font-family: SF Pro Display; font-weight:bold; color:black; line-height:0.8;">This project aims at recommending suitable</h2>
+                <h2 style="font-size:35px; font-family: SF Pro Display; font-weight:bold; color:black; line-height:0.8;">location where newly or pre established</h2>
+                <h2 style="font-size:35px; font-family: SF Pro Display; font-weight:bold; color:black;">businesses can start and bloom.</h2>
+                <p style="font-size:20px; font-family: SF Pro Display; color:black;">By anticipating factors such as industry, competition,</p>
+                <p style="font-size:20px; font-family: SF Pro Display; color:black;">frequencies and their average user ratings.</p>
+            </div>
+
+            <div id="card1" class="card">
+                <div class="container">
+                    <p style="margin-top:28px; font-size:16px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Using the K-means clustering</p>
+                    <p style="font-size:16px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">algorithm to propose</p>
+                    <p style="font-size:16px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">locations based on the</p>
+                    <p style="font-size:16px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">industry type and average</p>
+                    <p style="font-size:16px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">customer ranking.</p>
+                </div>
+            </div>
+
+            <div id="card2" class="card">
+                <div class="container">
+                    <p style="margin-top:28px; font-size:16px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:1;">Using Correlation analysis</p>
+                    <p style="font-size:16px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">between various sectors</p>
+                    <p style="font-size:16px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">to suggest locations</p>
+                    <p style="font-size:16px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">using a ranking algorithm.</p>
+                </div>
+            </div>
+
+            <div id="card3" class="card">
+                <div class="container">
+                    <p style="margin-top:28px; font-size:16px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">Predicting suitable business</p>
+                    <p style="font-size:16px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">that one may open in a</p>
+                    <p style="font-size:16px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">particular region using</p>
+                    <p style="font-size:16px; font-family: SF Pro Display; font-weight:bold; color:#CEBC81; line-height:0.9;">machine learning techniques.</p>
+                </div>
+            </div>
+
+            <div>
+                <img class="pointer" src="/static/pointer.gif" alt="" align="left">
+            </div>
+
+        </div>
+
+        <div id="flowchart" class="card4" style="margin-top: 152px;">
+            <div class="container" style="margin-left: 10px;">
+                <h2 style="margin-top:84; font-size:35px; font-family: SF Pro Display; font-weight:bold; color:black; line-height:0.8;">Get recommendations in</h2>
+                <h2 style="font-size:35px; font-family: SF Pro Display; font-weight:bold; color:black; line-height:0.8;">one click</h2>
+                <p style="font-size:20px; font-family: SF Pro Display; color:black;">Just select the industry type and get real time</p>
+                <p style="font-size:20px; font-family: SF Pro Display; color:black;">geo coordinates on the map.</p>
+                <img style="margin-left:553px; margin-top:-103px; box-shadow: 0 32px 32px 0 rgba(0, 0, 0, 0.75); border-radius:20px; width:800px; height:425px;"src="/static/demo.gif" alt="">
+
+            </div>
+
+        </div>
+
+        <br><br><br><br>
+
     </body>
 </html>

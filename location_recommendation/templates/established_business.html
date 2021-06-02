@@ -1,36 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
 <html>
     <head>
         <title>Establishment Business</title>
 
         <meta charset='utf-8' />
-    
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
+        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
-        <style>
-           body {
-            margin: 0;
-            padding: 0;
+    <style>
+
+        body{
+            background-color : #000000;
+            margin:0;
+            overflow-x:hidden;
         }
 
+        a{color:#FFFFFF; font-size:15px; font-family:SF Pro Display;}
+
+        h1{font-size:80px; font-weight:bold; font-family:SF Pro Display; margin-left:375px;}
+        
         #map {
-            /* position: absolute; */
-            /* top: 0;
-            bottom: 0; */
-            width: 500px;
-            height: 500px;
+            width: 123%;
+            height: 507px;
+            box-shadow: 0 64px 64px 0 rgba(0, 0, 0, 0.75);
         }
 
         .marker {
-            background-image: url("https://img.icons8.com/ios-filled/50/fa314a/place-marker--v2.png");
-            /* background-image: url("/cliparts/0/L/y/g/A/p/red-circle-th.png"); */
+            background-image: url("/static/Marker.gif");
             background-size: cover;
-            width: 50px;
-            height: 50px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #mark {
+            background-image: url("/static/cluster3.png");
+            /* background-size: cover; */
+            width: 10px;
+            height: 10px;
+            /* border-radius: 50%; */
             cursor: pointer;
         }
 
@@ -43,120 +60,449 @@
             font-family: 'Open Sans', sans-serif;
         }
 
-        </style>
+        .navbar {
+            display: inline-block;
+        }
+
+        
+        .nav-link {
+            font-weight: bold;
+            font-size: 14px;
+            text-decoration: none;
+            color: #FFFFFF;
+            padding: 20px 0px;
+            margin: 0px 20px;
+            display: inline-block;
+            position: relative;
+            opacity: 1;
+        }
+
+        .nav-link:hover {
+            opacity: 0.75;
+        }
+
+        .nav-link::before {
+            transition: 300ms;
+            height: 5px;
+            content: "";
+            position: absolute;
+            background-color: #00e64d;
+        }
+
+        .nav-link-ltr::before {
+            width: 0%;
+            bottom: 10px;
+        }
+
+        .nav-link-ltr:hover::before {
+            width: 100%;
+        }
+
+        #head1 {
+            background:linear-gradient(135deg, #0FB2EF 0%,#0FB2EF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: -45px;
+            font-size: 80px;
+        }
+
+        #card0 {
+            width: 96%;
+            height:711px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  #2c303a 0%, #2c303a 100%);
+            margin-top: 63px;
+            margin-left: 29px;
+        }
+
+        #card1 {
+            width: 32%;
+            height:610px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  black 0%, black 100%);
+            margin-top: 53px;
+            margin-left: -131px;
+        }
+
+        #card2 {
+            width: 32%;
+            height:610px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  black 0%, black 100%);
+            margin-top: -608px;
+            margin-left: 383px;
+        }
+
+        #card3 {
+            width: 32%;
+            height:610px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  black 0%, black 100%);
+            margin-top: -608px;
+            margin-left: 902px;
+            z-index: 1;
+        }
+
+        .card:hover {
+            -ms-transform: scale(1.1); 
+            -webkit-transform: scale(1.1); 
+            transform: scale(1.1); 
+            
+        }
+
+        .card {
+            box-shadow: 0 32px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        #card4 {
+            width: 96%;
+            height:550px;
+            border-radius: 11px;
+            background:linear-gradient(135deg,  black 0%, black 100%);
+            margin-top: 63px;
+            margin-left: 29px;
+        }
+
+
+        .text {
+            background: linear-gradient(135deg, white 0%,white 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container {
+            padding: 2px 16px;
+        }
+
+        #design {
+            max-width:100%;
+            height: auto;
+            margin-top:10px;
+            opacity:1;
+        }
+
+        .HomepageAnonHeader_bg-3LBLP {
+            bottom:201px;
+            position: absolute;
+            right:7px;
+            width: 600px;
+        }
+
+        .HomepageAnonHeader_bg-3LBLP0 {
+            bottom: -1179px;
+            position: absolute;
+            left: 8px;
+            width: 900px;
+        }
+
+    </style>
 
     </head>
+        
+        <div class="navbar">
+            <a href="http://127.0.0.1:8000/"><img style="height:273px; margin-top:-27px;" src="/static/logo.png" alt=""></a>
+            <a class="nav-link nav-link-ltr" style=" text-decoration:none; color:white; font-size:25px; font-weight:bold; margin-top:34px;" href="http://127.0.0.1:8000/">Why LBRS?</a>
+            <a class="nav-link nav-link-ltr" style=" text-decoration:none; color:white; font-size:25px; font-weight:bold; margin-top:34px;" href="{% url 'new_business' %}">New</a>
+            <a class="nav-link nav-link-ltr" style=" text-decoration:none; color:white; font-size:25px; font-weight:bold; margin-top:34px;" href="{% url 'established_business' %}">Established</a>
+            <a class="nav-link nav-link-ltr" style=" text-decoration:none; color:white; font-size:25px; font-weight:bold; margin-top:34px;" href="{% url 'region_wise_business' %}">Region</a>
+        </div>
+
+        <div>
+            <img class="HomepageAnonHeader_bg-3LBLP" id="design" src="https://cpwebassets.codepen.io/assets/packs/lines-2-4e66616a5ef291c3566a7ddfe1ffaaa8.svg" alt="" align="right">
+        </div>
 
 
-    <body>
-        {%if industry_type%}
-
-            <form action="" method="post">
-                {%csrf_token%}
-                <label for="industry_type">Industry:</label><br>
-                <input type="text" id="industry_type" name="industry_type" value = {{industry_type}}><br>
-                <label for="output">Output:</label><br>
-                <textarea id="output" name="output" rows="4" cols="50">{{output.0}},{{output.1}},{{output.2}}</textarea><br><br>
-                <input type="submit" value="Submit">
-            </form>
-
-
-                    <div id='map'></div>
-
-        <script>
-
-        var lon1 = {{lon.0}}; 
-        var lat1 = {{lat.0}};
-        var lon2 = {{lon.1}}; 
-        var lat2 = {{lat.1}};
-        var lon3 = {{lon.2}}; 
-        var lat3 = {{lat.2}};
-        var place1 = "{{output.0}}";
-        var place2 = "{{output.1}}";
-        var place3 = "{{output.2}}";
+        <div>
+            <img class="HomepageAnonHeader_bg-3LBLP0" id="design" src="https://cpwebassets.codepen.io/assets/packs/lines-3-4541e35a1939230404d773f7eeddcc9b.svg" alt="" align="right">
+        </div>
 
 
 
-
-        mapboxgl.accessToken = 'pk.eyJ1Ijoic3AyNjE5OTgiLCJhIjoiY2tucXo3djdjMGYybDJvbW54YmVqZ3J1YyJ9.qdnuS4178f-S2KEsrzrang';
-
-        var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/sp261998/cknr2i3lb0guc17p8njc9iuhn',
-        center: [73.85507695553459,18.554419017104955],
-        zoom: 10
-        });
-
-        var geojson = {
-        type: 'FeatureCollection',
-        features: [{
-            type: 'Feature',
-            geometry: {
-            type: 'Point',
-            coordinates: [lon1, lat1]
-            },
-            properties: {
-            title: place1,
-            description: 'Recommendation-1'
-            }
-        },
-        {
-            type: 'Feature',
-            geometry: {
-            type: 'Point',
-            coordinates: [lon2, lat2]
-            },
-            properties: {
-            title: place2,
-            description: 'Recommendation-2'
-            }
-        },
-        {
-            type: 'Feature',
-            geometry: {
-            type: 'Point',
-            coordinates: [lon3, lat3]
-            },
-            properties: {
-            title: place3,
-            description: 'Recommendation-3'
-            }
-        }]
-        };
+        <h1 id="head1" class="text">Established Businesses</h1>
 
 
-        // add markers to map
-        geojson.features.forEach(function(marker) {
 
-        // create a HTML element for each feature
-        var el = document.createElement('div');
-        el.className = 'marker';
+        {%if industry_type %}
 
-        // make a marker for each feature and add to the map
-        new mapboxgl.Marker(el)
-            .setLngLat(marker.geometry.coordinates)
-            .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-            .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
-            .addTo(map);
-        });
+        <form action="" method="post">
+            {%csrf_token%}
+            <select style="width: 307px; height: 55px; margin-left: 29px;border-radius: 11px; border: 5px solid #00FF00; background: #000000; color: #FFFFFF; margin-top: 60px;" name="industry_type" id="industry_type" onchange="this.form.submit()">
 
-        // var center = [-75.343, 39.984]; 
-        // var radius = 5; 
-        // var options = {steps: 10, units: 'kilometers', properties: {foo: 'bar'}}; 
-        // var circle = turf.circle(center, radius, options);
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="spa" {% if industry_type == 'spa' %}selected{% endif %}>Spa</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="book_store" {% if  industry_type == 'book_store' %}selected{% endif %}>Book Store</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="laundry" {% if  industry_type == 'laundry' %}selected{% endif %}>Laundry</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="travel_agency" {% if  industry_type == 'travel_agency' %}selected{% endif %}>Travel Agency</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="electronics_store" {% if  industry_type == 'electronics_store' %}selected{% endif %}>Electronics Store</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="furniture_store" {% if  industry_type == 'furniture_store' %}selected{% endif %}>Furniture Store</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="lodging" {% if  industry_type == 'lodging' %}selected{% endif %}>Lodging</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="movie_theater" {% if  industry_type == 'movie_theater' %}selected{% endif %}>Movie Theatre</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="cafe" {% if  industry_type == 'cafe' %}selected{% endif %}>Cafe</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="car_wash" {% if  industry_type == 'car_wash' %}selected{% endif %}>Car Wash</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="night_club" {% if  industry_type == 'night_club' %}selected{% endif %}>Night Club</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="gym" {% if  industry_type == 'gym' %}selected{% endif %}>Gym</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="aquarium" {% if  industry_type == 'aquarium' %}selected{% endif %}>Aquarium</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="shopping_mall" {% if  industry_type == 'shopping_mall' %}selected{% endif %}>Shopping Mall</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="clothing_store" {% if  industry_type == 'clothing_store' %}selected{% endif %}>Clothing Store</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="university" {% if  industry_type == 'university' %}selected{% endif %}>University</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="pet_store" {% if  industry_type == 'pet_store' %}selected{% endif %}>Pet Store</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="car_repair" {% if  industry_type == 'car_repair' %}selected{% endif %}>Car Repair</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="hardware_store" {% if  industry_type == 'hardware_store' %}selected{% endif %}>Hardware Store</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="jewelry_store" {% if  industry_type == 'jewelry_store' %}selected{% endif %}>Jwelery Store</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="supermarket" {% if  industry_type == 'supermarket' %}selected{% endif %}>Supermarket</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="gas_station" {% if  industry_type == 'gas_station' %}selected{% endif %}>Gas Station</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="beauty_salon" {% if  industry_type == 'beauty_salon' %}selected{% endif %}>Beauty Salon</option>
+                    <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="shoe_store" {% if  industry_type == 'shoe_store' %}selected{% endif %}>Shoe Store</option>
+            </select>
+            <br />
+            
+            <div id="card0" class="main-card">
+                <div class="container">
+
+                    <div id="card1" class="card">
+                        <div class="container">
+                            <h5 class="text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; font-size: 35px;">Recommendation 1</h5>
+                            <h6 class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Location Details:</h6>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Latitude: &nbsp; {{final_recomendation.0.0}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Longitude: &nbsp; {{final_recomendation.0.1}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Locality:&nbsp; &nbsp;{{final_recomendation.0.2}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Popularity-Index:&nbsp; &nbsp;{{final_recomendation.0.3.popularity_index}}%</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Positive-Rating:&nbsp; &nbsp;{{final_recomendation.0.3.percent_positive_rating}}%</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Negative-Rating:&nbsp; &nbsp;{{final_recomendation.0.3.percent_negative_rating}}%</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Shops:&nbsp; &nbsp;{{final_recomendation.0.3.total_shops_current_industry}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">All-Shops:&nbsp; &nbsp;{{final_recomendation.0.3.total_shops}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Total-reviews:&nbsp; &nbsp;{{final_recomendation.0.3.total_reviews}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Avg-Rating(Other Industries):&nbsp; &nbsp;{{final_recomendation.0.3.avg_rating_other_industries}}</p>
+                        </div>
+                    </div>
+
+                    <div id="card2" class="card">
+                        <div class="container">
+                            <h5 class="text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; font-size: 35px;">Recommendation 2</h5>
+                            <h6 class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Location Details:</h6>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Latitude: &nbsp; {{final_recomendation.1.0}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Longitude: &nbsp; {{final_recomendation.1.1}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Locality:&nbsp; &nbsp;{{final_recomendation.1.2}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Popularity-Index:&nbsp; &nbsp;{{final_recomendation.1.3.popularity_index}}%</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Positive-Rating:&nbsp; &nbsp;{{final_recomendation.1.3.percent_positive_rating}}%</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Negative-Rating:&nbsp; &nbsp;{{final_recomendation.1.3.percent_negative_rating}}%</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Shops:&nbsp; &nbsp;{{final_recomendation.1.3.total_shops_current_industry}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">All-Shops:&nbsp; &nbsp;{{final_recomendation.1.3.total_shops}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Total-reviews:&nbsp; &nbsp;{{final_recomendation.1.3.total_reviews}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Avg-Rating(Other Industries):&nbsp; &nbsp;{{final_recomendation.1.3.avg_rating_other_industries}}</p>
+                        </div>
+                    </div>
+
+                    <div id="card3" class="card">
+                        <div class="container">
+                            <h5 class="text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; font-size: 35px;">Recommendation 3</h5>
+                            <h6 class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Location Details:</h6>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Latitude: &nbsp; {{final_recomendation.2.0}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Longitude: &nbsp; {{final_recomendation.2.1}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Locality:&nbsp; &nbsp;{{final_recomendation.2.2}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Popularity-Index:&nbsp; &nbsp;{{final_recomendation.2.3.popularity_index}}%</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Positive-Rating:&nbsp; &nbsp;{{final_recomendation.2.3.percent_positive_rating}}%</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Negative-Rating:&nbsp; &nbsp;{{final_recomendation.2.3.percent_negative_rating}}%</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Shops:&nbsp; &nbsp;{{final_recomendation.2.3.total_shops_current_industry}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">All-Shops:&nbsp; &nbsp;{{final_recomendation.2.3.total_shops}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Total-reviews:&nbsp; &nbsp;{{final_recomendation.2.3.total_reviews}}</p>
+                            <p class="card-text" style="padding:5px; font-weight:bold; font-family: SF Pro Display; color:#CEBC81; font-size: 20px;">Avg-Rating(Other Industries):&nbsp; &nbsp;{{final_recomendation.2.3.avg_rating_other_industries}}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            
+
+        </form>
+
+        <div id="card4" class="map-card">
+            <div class="container">
+                <div id='map' style="margin-left: -131px; margin-top: -4px; border-radius: 11px;"></div>
+
+                    <script>
+
+                            var cluster_list = {{cord_business}};
+                            var lat_center = "{{center_lat}}";
+                            var lon_center = "{{center_lon}}";
+                            var place1 = "{{output.0}}";
+                            var place2 = "{{output.1}}";
+                            var place3 = "{{output.2}}";
+                            var cord_array = Array();
+                            var lon1 = {{lon.0}}; 
+                            var lat1 = {{lat.0}};
+                            var lon2 = {{lon.1}}; 
+                            var lat2 = {{lat.1}};
+                            var lon3 = {{lon.2}}; 
+                            var lat3 = {{lat.2}};
+
+                            
+                            var geojson = {
+                            type: 'FeatureCollection',
+                            features: [{
+                                type: 'Feature',
+                                geometry: {
+                                type: 'Point',
+                                coordinates: [lon1, lat1]
+                                },
+                                properties: {
+                                title: place1,
+                                description: 'Recommendation-1'
+                                }
+                            },
+                            {
+                                type: 'Feature',
+                                geometry: {
+                                type: 'Point',
+                                coordinates: [lon2, lat2]
+                                },
+                                properties: {
+                                title: place2,
+                                description: 'Recommendation-2'
+                                }
+                            },
+                            {
+                                type: 'Feature',
+                                geometry: {
+                                type: 'Point',
+                                coordinates: [lon3, lat3]
+                                },
+                                properties: {
+                                title: place3,
+                                description: 'Recommendation-3'
+                                }
+                            }]
+                            };
+
+                            cluster_list.forEach(function(coor) {
+                                feature =  
+                                    {
+                                        type: 'Feature',
+                                        geometry: {
+                                        type: 'Point',
+                                        coordinates: [coor[1], coor[0]]
+                                        },
+                                        properties: {
+                                        title: 'other',
+                                        description: 'other'
+                                        }
+                                    }
+                                    cord_array.push(feature)
+                            })
 
 
-        </script>
+
+                            mapboxgl.accessToken = 'pk.eyJ1Ijoic3AyNjE5OTgiLCJhIjoiY2tucXo3djdjMGYybDJvbW54YmVqZ3J1YyJ9.qdnuS4178f-S2KEsrzrang';
+
+                            var map = new mapboxgl.Map({
+                            container: 'map',
+                            style: 'mapbox://styles/sp261998/ckojupmvi1rfx17oht4q73d08',
+                            center: [lon_center,lat_center],
+                            zoom: 11
+                            });
+                            
+                            
+
+                            // add markers to map
+                            geojson.features.forEach(function(marker) {
+
+                            // create a HTML element for each feature
+                            var el = document.createElement('div');
+                            el.className = 'marker';
+
+                            // make a marker for each feature and add to the map
+                            new mapboxgl.Marker(el)
+                                .setLngLat(marker.geometry.coordinates)
+                                .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+                                .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+                                .addTo(map);
+                            });
+
+                            // for other clusters
+
+                            var geojson = {
+                            type: 'FeatureCollection',
+                            features: cord_array
+                            };
+                            
+
+                            // add markers to map
+                            geojson.features.forEach(function(marker) {
+
+                            // create a HTML element for each feature
+                            var el = document.createElement('div');
+                            el.className = 'marker';
+                            el.id = 'mark'
+                            // make a marker for each feature and add to the map
+                            new mapboxgl.Marker(el)
+                                .setLngLat(marker.geometry.coordinates)
+                                // .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+                                // .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+                                .addTo(map);
+                            });
+
+
+
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        
+        <br>
+        <br>
+        <br>
 
         {%else%}
+            
             <form action="" method="post">
-                {%csrf_token%}
-                <label for="industry_type">Industry:</label><br>
-                <input type="text" id="industry_type" name="industry_type" placeholder="Type your industry"><br>
-                <label for="output">Output:</label><br>
-                <input type="text" id="output" name="output"><br><br>
-                <input type="submit" value="Submit">
-            </form>
+            {%csrf_token%}
+                <select style="width: 307px; height: 55px; margin-left: 29px;border-radius: 11px; border: 5px solid #00FF00; background: #000000; color: #FFFFFF; margin-top: 60px;" name="industry_type" id="industry_type" onchange="this.form.submit()">
+                <option value="Choose Your Industry"selected>Choose Your Industry</option>
+
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="spa">Spa</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="book_store">Book Store</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="laundry">Laundry</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="travel_agency">Travel Agency</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="electronics_store">Electronics Store</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="furniture_store">Furniture Store</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="lodging">Lodging</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="movie_theater">Movie Theatre</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="cafe">Cafe</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="car_wash">Car Wash</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="night_club">Night Club</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="gym">Gym</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="aquarium">Aquarium</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="shopping_mall">Shopping Mall</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="clothing_store">Clothing Store</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="university">University</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="pet_store">Pet Store</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="car_repair">Car Repair</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="hardware_store">Hardware Store</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="jewelry_store">Jwelery Store</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="supermarket">Supermarket</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="gas_station">Gas Station</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="beauty_salon">Beauty Salon</option>
+                <option style="font-weight: bold; font-size: 15px; font-family: SF Pro Display;" value="shoe_store">Shoe Store</option>
+            </select>
+            <br>
+            
+            <div id="card4" style=" height:428px; width: 627px;margin-left: 29px;border-radius: 11px; border: 5px solid #00FF00; background: #000000; color: #FFFFFF; margin-top: 25px;">
+                <div class="card-body" style="padding-top: 137px; padding-left:120px; padding-right:108px; text-align: center; font-size:21px ; font-family: SF Pro Display;">
+                    <p class="card-text">Please select the industry type for the model to give out the top three best suitable locations for your business</p>
+                </div>
+              </div>
+        </form>
+        <br>
+        <br>
+        <br>
         {%endif%}
     </body>
 </html>
+
+
+
+
+
+
+
